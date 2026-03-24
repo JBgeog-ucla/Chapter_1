@@ -5,7 +5,10 @@ tj = r"C:\Mac\Home\Documents\ArcGIS Pro 3.5\Chapter1\Kern_Co_Richgrove_Template\
 fields = ["Code", "Crop_category", "Crop_type", "Irrigation_Status", "Land_cover", "Notes"]
 values = ["iF1", "F", "Cotton", "i", "<Null>", "<Null>"]
 
-table = arcpy.da.UpdateCursor(tj, fields)
+where = "OBJECTID >= 107 AND OBJECTID <= 149"
+
+table = arcpy.da.UpdateCursor(tj, fields, 
+                              where_clause = where)
 
 for row in table:
     for i, val in enumerate(values):
