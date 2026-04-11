@@ -6,11 +6,14 @@ fields = ["Code", "Crop_category", "Crop_type", "Irrigation_Status", "Land_cover
 
 mapping = {
     "NV": [None, None, None, "Native vegetation", None],
+    "NV/iD7": [None, None, None, "Native vegetation", "mixed use, plums"],
     "NB" : [None, None, None, "Barren and Wasteland", None],
     "iP1S": ["P", "Alfalfa and alfalfa mix", "i", None, "seed crop"],
     "iP1": ["P", "Alfalfa and alfalfa mix", "i", None, None],
+    "iPF": ["P", "Fallow", "i", None, None],
     "iF1": ["F", "Cotton", "i", None, None],
     "iF2": ["F", "Safflower", "i", None, None],
+    "iF11": ["F", "Misc. field", "i", None, None],
     "iT9": ["T", "Melons, squash, and cucumbers", "i", None, None],
     "iT10": ["T", "Onions and garlic", "i", None, None],
     "U13": ["U", None, None, "Sewage treatment plant", None],
@@ -27,6 +30,8 @@ mapping = {
     "iT5": ["T", "Unknown", "i", None, None],
     "iT3": ["T", "Beans (green)", "i", None, None],
     "UI1": [None, None, None, "Urban industrial", "Manufacturing, assembling, and general processing"],
+    "UI3": ["U", None, None, "Urban industrial", "Storage and Distribution"],
+    "UI2": ["U", None, None, "Urban industrial", "Extractive industries"],
     "iF1-50/iG1-50": ["F", "Cotton", "i", None, "intercrop"],
     "I1": ["I", "Idle", None, None, "Land cropped in past years but not tilled"],
     "I2": ["I", "New Land", "i", None, "prepped for crop production"],
@@ -45,6 +50,7 @@ mapping = {
     "iF1/iD4Y": ["F", "Cotton", "i", None, "intercrop"],
     "iD4Y": ["D", "Deciduous fruits and nuts", "i", None, "young non-bearing"],
     "iD5Y": ["D", "Peaches and nectarines", "i", None, "young non-bearing"],
+    "iD7": ["D", "Plums", "i", None, None],
     "iP2S": ["P", "Clover", "i", None, "seed crop"],
     "UC5": ["U", None, None, "Urban Institutions", "hospitals, prisons"],
     "iP3": ["P", "Mixed pasture", "i", None, None],
@@ -66,7 +72,7 @@ for row in cursor:
 
     if code in mapping:
         values = mapping[code]
-
+        #position 1 in each row holds the crop code 
         row[1] = values[0]
         row[2] = values[1]
         row[3] = values[2]
@@ -76,3 +82,5 @@ for row in cursor:
         cursor.updateRow(row)
 
 del cursor
+
+
